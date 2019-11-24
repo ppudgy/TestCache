@@ -9,6 +9,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LRUCacheMapTest {
+
     @Test
     @DisplayName("LRUCacheMap zero capacity")
     void testZeroCapacity() {
@@ -123,5 +124,18 @@ public class LRUCacheMapTest {
         assertThat(ten).isPresent().get().isEqualTo(10);
         Optional zero = cache.get(0);
         assertThat(zero).isPresent().get().isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("LRUCacheMap get old value test")
+    void testGetOldValue() {
+        LRUCacheMap<Integer, Integer> cache = new LRUCacheMap<>(10);
+
+        cache.put(1,1);
+        Optional old = cache.put(1, 11);
+        Optional curr = cache.get(1);
+
+        assertThat(old).isPresent().get().isEqualTo(1);
+        assertThat(curr).isPresent().get().isEqualTo(11);
     }
 }

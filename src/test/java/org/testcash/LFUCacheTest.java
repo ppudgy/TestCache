@@ -9,6 +9,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LFUCacheTest {
+
     @Test
     @DisplayName("LFUCache zero capacity")
     void testZeroCapacity() {
@@ -21,7 +22,6 @@ public class LFUCacheTest {
         LFUCache<Integer, Integer> cache = new LFUCache<>(10);
 
         Assertions.assertThrows(AssertionError.class, () -> cache.put(null, 1));
-
     }
 
     @Test
@@ -126,7 +126,7 @@ public class LFUCacheTest {
     }
 
     @Test
-    @DisplayName("LFUCache policy test")
+    @DisplayName("LFUCache get old value test")
     void testGetOldValue() {
         LFUCache<Integer, Integer> cache = new LFUCache<>(10);
 
@@ -137,5 +137,4 @@ public class LFUCacheTest {
         assertThat(old).isPresent().get().isEqualTo(1);
         assertThat(curr).isPresent().get().isEqualTo(11);
     }
-
 }
