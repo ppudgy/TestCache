@@ -81,9 +81,7 @@ public class LFUCache<Key, Value> implements Cache<Key, Value> {
 
     private void evict() {
         LinkedList<Node<Key, Value>> nodes = frequencyList[lowestFrequency];
-        if (nodes.isEmpty()) {
-            throw new IllegalStateException("Lowest frequency constraint violated!");
-        }
+        assert nodes != null && !nodes.isEmpty();
         Iterator<Node<Key, Value>> it = nodes.iterator();
         if(it.hasNext()) {
             Node<Key, Value> node = it.next();
